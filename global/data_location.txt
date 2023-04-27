@@ -1,4 +1,5 @@
-Google Drive shared by Gianluca, address private
+source: Google Drive shared by Gianluca, address private
 
-MSU HPC2 file server project storage:
-/gri/projects/rgmg/climate/UN_FAO/DataDownload03152023/
+Permanent storage (MSU project storage):
+/gri/projects/rgmg/climate/UN_FAO/data_downloads/2023-03-15_DataDownload/
+
