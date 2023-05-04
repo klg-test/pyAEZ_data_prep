@@ -3,9 +3,17 @@ PROGRAM read_AgERA5pxv
     IMPLICIT NONE
     
     !!!!!
-    ! read AgERA5 pxv data files and output to dat files
+    ! Author: K. Geil, translated and modified from code written by Gunter Fischer (IIASA)
+    ! Date: 04/2023
+    ! Description: read AgERA5 pxv data files and output to dat files
+    !
     ! input file source: Gianluca's Google Drive (link not included here for privacy)
-    ! input file storage location: /gri/projects/rgmg/climate/UN_FAO/2023-03-15_DataDownload/
+    ! input file permanent storage location: /gri/projects/rgmg/climate/UN_FAO/2023-03-15_DataDownload/
+    ! 
+    ! compile this script at the command line where the gfortran compiler is available, ex: on Orion HPC
+    ! and then run the executable, like this:
+    ! gfortran 00_pxv_to_dat.f95 -o 00_pxv_to_dat
+    ! ./00_pxv_to_dat
     !!!!!
 
     INTEGER, PARAMETER :: MXERA5=2160, MYERA5=4320
@@ -42,7 +50,6 @@ PROGRAM read_AgERA5pxv
     ENDIF
 
     ALLOCATE(buf(MD365))
-    PRINT*,'ndays=',MD365
 
 
     !construct the input and output filenames    
