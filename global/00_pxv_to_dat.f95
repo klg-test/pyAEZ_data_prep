@@ -92,7 +92,7 @@ PROGRAM read_AgERA5pxv
             IF (isok(ir,ic) .eq. 1) THEN
                 kpx = kpx + 1
                 READ(11,rec=kpx) (buf(j),j=1,MD365)
-                WRITE(12,'(2i6,/,*(i6))') ir,ic,(buf(j),j=1,MD365)
+                WRITE(12,'(2i7,/,*(i7))') ir,ic,(buf(j),j=1,MD365)
             END IF
         END DO
     END DO
