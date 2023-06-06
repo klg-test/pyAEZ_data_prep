@@ -1,0 +1,55 @@
+Scripts in this folder take the global 1980 daily deviation and monthly data 
+provided by Gianluca and Gunther and produce the daily input files for pyaez.
+Scripts should be run in the following order and descriptions follow:
+
+
+00_pxv_to_dat.f95
+Inputs: pxv files containing daily deviations
+Outputs: dat files containing daily deviations
+Decription: Translate daily deviations from pxv to dat. These files contain 
+only grid cells with data present (cells under the mask are not present).
+
+01_dat_to_nc.ipynb
+Inputs: dat files containing daily deviations
+Outputs: netcdf files containing daily deviations on a global grid
+Description: Translate daily deviation dat files to netcdf with appropriate
+metadata attached. Also, put data onto a global grid (2160 latitudes x 4320 
+longitudes) where cells without data/under the mask are assigned to nan.
+Scale factors/unit conversions provided by Gunther are applied during the 
+translation process.
+
+02_rst_to_nc.ipynb
+Inputs: rst files containing monthly data and elevation
+Outputs: netcdf files of monthly data, admin mask, elevation on global grid
+Description: Translate rst monthly files to netcdf on a global grid (2160 
+latitudes x 4320 longitudes) with appropriate metadata attached. Generate a
+0/1 administrative mask because the masks provided (ALOSmask_5m.rst) did not 
+match each other or where either the monthly or daily deviation files had 
+data present. The global mask generated has 2268708 grid cells equal to one,
+representing land grid cells with data present. Also, translate elevation to
+netcdf.
+
+03_create_pyaez_daily.ipynb
+Inputs: netcdf files containing daily devations and monthly data
+Outputs: netcdf files containing daily data
+Description: Generate daily data values by adding the daily deviation to the
+monthly data. Create two new variables Wind-2m from Wind-10m and Rhum from
+Vapr, Tmin-2m, Tmax-2m.
+
+
+
+
+Data sources:
+Gianluca's Google Drive (address not included for privacy): monthly rst files and daily deviation pxv files
+Gunther by FileSender: monthly Srad tif files
+
+Data Storage Locations:
+HPC Orion:
+/work/hpc/datasets/un_fao/gaez/global_1980/dailydev
+/work/hpc/datasets/un_fao/pyaez/global_1980/monthly
+/work/hpc/datasets/un_fao/pyaez/static
+/work/hpc/datasets/un_fao/pyaez/global_1980/daily
+
+MSU project storage:
+/gri/projects/rgmg/UN_FAO
+

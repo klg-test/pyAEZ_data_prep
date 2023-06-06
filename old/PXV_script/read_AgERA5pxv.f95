@@ -3,17 +3,9 @@ PROGRAM read_AgERA5pxv
     IMPLICIT NONE
     
     !!!!!
-    ! Author: code written by Gunther Fischer (IIASA), translated and modified by K Geil
-    ! Date: 04/2023
-    ! Description: read AgERA5 pxv data files and output to dat files
-    !
+    ! read AgERA5 pxv data files and output to dat files
     ! input file source: Gianluca's Google Drive (link not included here for privacy)
-    ! input file permanent storage location: /gri/projects/rgmg/UN_FAO/
-    ! 
-    ! compile this script at the command line where the gfortran compiler is available, eg on Orion HPC
-    ! and then run the executable, like this:
-    ! gfortran 00_pxv_to_dat.f95 -o 00_pxv_to_dat
-    ! ./00_pxv_to_dat
+    ! input file storage location: /gri/projects/rgmg/climate/UN_FAO/2023-03-15_DataDownload/
     !!!!!
 
     INTEGER, PARAMETER :: MXERA5=2160, MYERA5=4320
@@ -23,9 +15,9 @@ PROGRAM read_AgERA5pxv
     INTEGER :: ir, ic, j, year, kpx, leapyr, isleap, MD365, IRmin, IRmax, nchars_var, nchars_info, nchars_suf
     DATA IRmin,IRmax /1,1800/
     CHARACTER(LEN=*), PARAMETER :: datainfo='365_AgERA5_Hist_', suffpxv='_5m.pxv', suffdat='_5m.dat' 
-    CHARACTER(LEN=*), PARAMETER :: flnmsk = '/work/hpc/datasets/un_fao/pyaez/static/rst/ALOSmask5m_fill.rst'
-    CHARACTER(LEN=*), PARAMETER :: input_dir='/work/hpc/datasets/un_fao/gaez/global_1980/dailydev/pxv/' 
-    CHARACTER(LEN=*), PARAMETER :: output_dir='/work/hpc/datasets/un_fao/gaez/global_1980/dailydev/dat/'
+    CHARACTER(LEN=*), PARAMETER :: flnmsk = '/work/hpc/users/kerrie/UN_FAO/data/orig/DataDownload03152023/ALOSmask5m_fill.rst'
+    CHARACTER(LEN=*), PARAMETER :: input_dir='/work/hpc/users/kerrie/UN_FAO/data/orig/DataDownload03152023/Climate/daily/' 
+    CHARACTER(LEN=*), PARAMETER :: output_dir='/work/hpc/users/kerrie/UN_FAO/data/gaez_dat_files/global_1980/'
     CHARACTER(16) :: varnam
     CHARACTER(4) :: chyear
     CHARACTER(LEN=:), ALLOCATABLE :: fln365, flnout
@@ -50,6 +42,7 @@ PROGRAM read_AgERA5pxv
     ENDIF
 
     ALLOCATE(buf(MD365))
+    PRINT*,'ndays=',MD365
 
 
     !construct the input and output filenames    
@@ -78,12 +71,12 @@ PROGRAM read_AgERA5pxv
         END DO
     END DO
     CLOSE(1)
-
+    
 
     ! convert data pxv to dat
-    OPEN(11,file=input_dir//fln365,access='direct',recl=MD365*2) ! input pxv file
+    OPEN(11,file=input_dir//fln365,access='direct',recl=MD365*2)
     WRITE(6,*) 'Reading file:', input_dir//fln365
-    OPEN(12,file=output_dir//flnout) ! output dat file
+    OPEN(12,file=output_dir//flnout)
 
     kpx = 0
     DO ir=IRmin,IRmax
@@ -92,7 +85,7 @@ PROGRAM read_AgERA5pxv
             IF (isok(ir,ic) .eq. 1) THEN
                 kpx = kpx + 1
                 READ(11,rec=kpx) (buf(j),j=1,MD365)
-                WRITE(12,'(2i7,/,*(i7))') ir,ic,(buf(j),j=1,MD365)
+                WRITE(12,'(2i6,/,*(i6))') ir,ic,(buf(j),j=1,MD365)
             END IF
         END DO
     END DO
@@ -112,7 +105,7 @@ INTEGER FUNCTION leapyr(iyear)
     IMPLICIT NONE
     INTEGER, INTENT(IN) :: iyear
     
-    IF (iyear.lt.1980 .or. iyear.gt.2020) THEN
+    IF (iyear.lt.1981 .or. iyear.gt.2020) THEN
         leapyr=0
         RETURN
     ENDIF
