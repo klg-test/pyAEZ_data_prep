@@ -36,6 +36,12 @@ Description: Generate daily data values by adding the daily deviation to the
 monthly data. Create two new variables Wind-2m from Wind-10m and Rhum from
 Vapr, Tmin-2m, Tmax-2m.
 
+04_nc_to_npy_tiff.ipynb
+Inputs: netcdf files containing daily data
+Outputs: npy files containing daily data, tif file containing the mask
+Description: Translate files of daily data to npy and static files (mask,
+elevation) to tif format. These formats are what is currently used in pyaez NB1.  
+
 
 
 
