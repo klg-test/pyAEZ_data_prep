@@ -5,7 +5,7 @@ PROGRAM read_AgERA5pxv
     !!!!!
     ! Author: code written by Gunther Fischer (IIASA), translated and modified by K Geil
     ! Date: 04/2023
-    ! Description: read AgERA5 pxv data files and output to dat files
+    ! Description: read pxv data files containing daily deviations and output to dat files
     !
     ! input file source: Gianluca's Google Drive (link not included here for privacy)
     ! input file permanent storage location: /gri/projects/rgmg/UN_FAO/
