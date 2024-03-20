@@ -51,7 +51,7 @@ try:
         processes=1,
         cores=20,
         memory='240GB',#'160GB',
-        walltime="00:10:00",
+        walltime="00:6:00",
         log_directory=daskpath)
 except:
     sys.exit('Error starting a cluster with dask SLURMCluster')

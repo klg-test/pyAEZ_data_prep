@@ -33,11 +33,12 @@ with dask.config.set(**{'array.slicing.split_large_chunks': False}):
     if f:
         print('reading',f[0])
         try:
-            if (int(year)>=1981) & (int(year)<=2024):
-                dropdate=year+'02-29'
+            if (int(year)>=1980) & (int(year)<=2024):
+                dropdate=year+'-02-29'
             else: 
                 dropdate='1900-02-29'
             data = xr.open_dataset(f[0],chunks=chunks)[var_in].sel(lat=slice(90,-60.)).drop_sel(time=dropdate).transpose('lat','lon','time').data
+            print('dropping date',dropdate)
         except:
             data = xr.open_dataset(f[0],chunks=chunks)[var_in].sel(lat=slice(90,-60.)).transpose('lat','lon','time').data
 

@@ -75,7 +75,7 @@ PROGRAM read_AgERA5pxv
             IF (isok(ir,ic) .eq. 1) THEN
                 kpx = kpx + 1
                 READ(11,rec=kpx) (buf(j),j=1,nmonths)
-                WRITE(12,'(2i8,/,*(f20.4))') ir,ic,(buf(j),j=1,nmonths)
+                WRITE(12,'(2i8,/,*(f30.12))') ir,ic,(buf(j),j=1,nmonths)
             END IF
         END DO
     END DO
