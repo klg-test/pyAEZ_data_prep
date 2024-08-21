@@ -1,0 +1,12 @@
+name: /work/orion/users/kerrie/envs/pyaez_prep
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - dask
+  - numpy
+  - pandas
+  - rioxarray
+  - xarray
+  - ipykernel
+prefix: /work/orion/users/kerrie/envs/pyaez_prep
